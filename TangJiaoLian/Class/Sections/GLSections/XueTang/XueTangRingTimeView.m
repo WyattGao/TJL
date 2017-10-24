@@ -141,10 +141,10 @@
 - (void)refreshTwinklingBtn
 {
     //    if (ISBINDING) {
-    if (![self.nowHourBtn.text isEqualToString:[[NSDate date] toString:@"H"]] || !self.nowHourBtn.layer.animationKeys.count) { //判断时间是否变更和动画是否停止
-        WS(ws);
-
-        GL_DISPATCH_MAIN_QUEUE(^{
+    GL_DISPATCH_MAIN_QUEUE(^{
+        if (![self.nowHourBtn.text isEqualToString:[[NSDate date] toString:@"H"]] || !self.nowHourBtn.layer.animationKeys.count) { //判断时间是否变更和动画是否停止
+            WS(ws);
+            
             //先移除之前按钮的动画
             [ws.nowHourBtn.layer removeAllAnimations];
             //找到当前时间对应的按钮
@@ -163,9 +163,10 @@
                 //刷新按钮状态
                 [self refreshAllTimebuttonWarningState];
             }
-        });
-        
-    }
+            
+        }
+    });
+
     //    }
 }
 

@@ -10,6 +10,8 @@
 #import "GLTabBarViewController.h"
 #import "MMPDeepSleepPreventer.h"
 #import "sanbg.h"
+#import <YZBaseSDK/YZBaseSDk.h>
+#import <YZNativeSDK/YZNativeSDK.h>
 
 @interface AppDelegate ()<EMContactManagerDelegate,EMChatManagerDelegate>
 
@@ -28,11 +30,6 @@
     //设置RootViewController
     [self setAppOption];
     [self createRootViewController];
-    
-    //设置血糖预警震动控制器
-    self.shakeTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(shake) userInfo:nil repeats:true];
-    //接收血糖预警的通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(warningPush) name:@"warningPush" object:nil];
     
     return YES;
 }
@@ -64,6 +61,27 @@
     [[EMClient sharedClient].contactManager addDelegate:self delegateQueue:nil];
     //注册消息回调
     [[EMClient sharedClient].chatManager addDelegate:self delegateQueue:nil];
+    
+    //设置有赞代理
+    //设置clientId
+    [YZSDK setUpWithClientId:@"c6561083fc718aaa79"];
+    //有赞自动注册信息
+    if (YZISLOGIN) {
+        NSDictionary *dic = [GLCache readCacheDicWithName:YZToken];
+        if ([dic count]) {
+            //清除之前的登陆信息
+            [YZSDK logout];
+            //设置登陆信息
+            [YZSDK setToken:[dic getStringValue:@"access_token"] key:[dic getStringValue:@"cookie_key"] value:[dic getStringValue:@"cookie_value"]];
+        }
+    }
+    
+    //设置血糖预警震动控制器
+    self.shakeTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(shake) userInfo:nil repeats:true];
+    //接收血糖预警的通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(warningPush) name:@"warningPush" object:nil];
+    
+
 }
 
 /**

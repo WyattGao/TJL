@@ -381,6 +381,10 @@
 		26B68CE01E81535500F9CF15 /* STSelPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B68CDF1E81535500F9CF15 /* STSelPickerView.m */; };
 		26C37DB91F4BCA3C00F7C8D1 /* RunChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26C37DB81F4BCA3C00F7C8D1 /* RunChartViewController.m */; };
 		26C37DBC1F4BCAE000F7C8D1 /* RunChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26C37DBB1F4BCAE000F7C8D1 /* RunChartView.m */; };
+		26CAA7461F94AD6C0017E5BD /* Unsuggest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26CAA73B1F94A95E0017E5BD /* Unsuggest.framework */; };
+		26CAA7471F94AD720017E5BD /* YZBaseSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26CAA73A1F94A95E0017E5BD /* YZBaseSDK.framework */; };
+		26CAA7481F94AD720017E5BD /* YZNativeRes.bundle in Frameworks */ = {isa = PBXBuildFile; fileRef = 26CAA73D1F94A95F0017E5BD /* YZNativeRes.bundle */; };
+		26CAA7491F94AD720017E5BD /* YZNativeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26CAA73C1F94A95E0017E5BD /* YZNativeSDK.framework */; };
 		26CCA89D1E77FB57001D0E05 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 26CCA89C1E77FB57001D0E05 /* main.m */; };
 		26CCA8A61E77FB57001D0E05 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26CCA8A41E77FB57001D0E05 /* Main.storyboard */; };
 		26CCA8A81E77FB57001D0E05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26CCA8A71E77FB57001D0E05 /* Assets.xcassets */; };
@@ -1143,6 +1147,10 @@
 		26C37DB81F4BCA3C00F7C8D1 /* RunChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunChartViewController.m; sourceTree = "<group>"; };
 		26C37DBA1F4BCAE000F7C8D1 /* RunChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunChartView.h; sourceTree = "<group>"; };
 		26C37DBB1F4BCAE000F7C8D1 /* RunChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunChartView.m; sourceTree = "<group>"; };
+		26CAA73A1F94A95E0017E5BD /* YZBaseSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = YZBaseSDK.framework; sourceTree = "<group>"; };
+		26CAA73B1F94A95E0017E5BD /* Unsuggest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Unsuggest.framework; sourceTree = "<group>"; };
+		26CAA73C1F94A95E0017E5BD /* YZNativeSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = YZNativeSDK.framework; sourceTree = "<group>"; };
+		26CAA73D1F94A95F0017E5BD /* YZNativeRes.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = YZNativeRes.bundle; sourceTree = "<group>"; };
 		26CCA8981E77FB57001D0E05 /* TangJiaoLian.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TangJiaoLian.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26CCA89C1E77FB57001D0E05 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		26CCA8A51E77FB57001D0E05 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -1311,6 +1319,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26CAA7461F94AD6C0017E5BD /* Unsuggest.framework in Frameworks */,
+				26CAA7471F94AD720017E5BD /* YZBaseSDK.framework in Frameworks */,
+				26CAA7481F94AD720017E5BD /* YZNativeRes.bundle in Frameworks */,
+				26CAA7491F94AD720017E5BD /* YZNativeSDK.framework in Frameworks */,
 				26D0B4901E8CF00E009F1774 /* AVFoundation.framework in Frameworks */,
 				263949BD1F53BA52009BB8AC /* Charts.framework in Frameworks */,
 				2648867B1E901121007A98D7 /* libopencore-amrnb.a in Frameworks */,
@@ -2664,6 +2676,7 @@
 		26A3071E1E7D3503004A3C2B /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				26CAA7381F94A94A0017E5BD /* Youzan */,
 				263949B31F53BA36009BB8AC /* Charts */,
 				26B4225C1F4D7B9B006143FC /* JHAlertUtil */,
 				2600D0AE1F42E0260038E096 /* TRSDialScrollView */,
@@ -2857,6 +2870,17 @@
 				26394AEA1F5407D7009BB8AC /* XueTangLineViewEntity.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		26CAA7381F94A94A0017E5BD /* Youzan */ = {
+			isa = PBXGroup;
+			children = (
+				26CAA73B1F94A95E0017E5BD /* Unsuggest.framework */,
+				26CAA73A1F94A95E0017E5BD /* YZBaseSDK.framework */,
+				26CAA73D1F94A95F0017E5BD /* YZNativeRes.bundle */,
+				26CAA73C1F94A95E0017E5BD /* YZNativeSDK.framework */,
+			);
+			path = Youzan;
 			sourceTree = "<group>";
 		};
 		26CCA88F1E77FB57001D0E05 = {
@@ -4267,6 +4291,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 5L9T4LF6JF;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/TangJiaoLian/Class/Vendors/Youzan",
+				);
 				GCC_PREFIX_HEADER = "$(SRCROOT)/TangJiaoLian/PrefixHeader.pch";
 				INFOPLIST_FILE = TangJiaoLian/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -4301,6 +4329,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 5L9T4LF6JF;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/TangJiaoLian/Class/Vendors/Youzan",
+				);
 				GCC_PREFIX_HEADER = "$(SRCROOT)/TangJiaoLian/PrefixHeader.pch";
 				INFOPLIST_FILE = TangJiaoLian/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

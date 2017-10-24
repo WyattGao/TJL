@@ -8,3 +8,5 @@
 
 #define HOST_URL @"http://admin.tangjiaolian.cn/mobileapi"
 #define HOST_HEADER @"http://admin.tangjiaolian.cn/"
+#define YZMALL_URL @"https://kdt.im/pVZG2h"
+#define YZLOGIN_URL @"http://admin.tangjiaolian.cn/youzan/yzuser"

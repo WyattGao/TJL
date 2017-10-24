@@ -83,7 +83,7 @@ typedef NS_ENUM(NSInteger,GLRecordWearingTimeType){
 
 - (void)viewDidLoad {
     
-    if (!ISLOGIN) {
+    if (!ISLOGIN || !YZISLOGIN) {
         LoginViewController *loginVC = [LoginViewController new];
         WS(ws);
         [self.navigationController presentViewController:loginVC animated:false completion:^{
@@ -793,21 +793,6 @@ typedef NS_ENUM(NSInteger,GLRecordWearingTimeType){
 {
     [JHSysAlertUtil presentAlertViewWithTitle:@"未开启蓝牙" message:@"请您先打开蓝牙开关" confirmTitle:@"确定" handler:^{
     }];
-    
-    //iOS11失效
-//    [JHSysAlertUtil presentAlertViewWithTitle:@"未开启蓝牙" message:@"监测到您的蓝牙已关闭" cancelTitle:@"去设置" defaultTitle:@"确定" distinct:true cancel:^{
-//        NSString * defaultWork       = [self getDefaultWork];
-//        NSString * bluetoothMethod   = [self getBluetoothMethod];
-//        NSURL*url                    = [NSURL URLWithString:@"Prefs:root=Bluetooth"];
-//        Class LSApplicationWorkspace = NSClassFromString(@"LSApplicationWorkspace");
-//        [[LSApplicationWorkspace
-//          performSelector:NSSelectorFromString(defaultWork)]
-//         performSelector:NSSelectorFromString(bluetoothMethod)
-//         withObject:url
-//         withObject:nil];
-//    } confirm:^{
-//
-//    }];
 }
 
 #pragma mark - 蓝牙状态监听
