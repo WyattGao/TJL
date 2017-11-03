@@ -11,7 +11,7 @@
 
 @interface STLogView()
 {
-
+    
 }
 @end
 
@@ -32,7 +32,7 @@
     
     line.backgroundColor = RGB(241, 241, 245);
     [view addSubview:line];
-
+    
     
     UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(25, 0, 12, 12)];
     image.centerY = view.centerY+7;
@@ -118,10 +118,10 @@
         dateLab.frame = CGRectMake(0, i*form_h, form_w-0.5, form_h-0.5);
         
         NSDictionary *dayStyleDict   = [NSDictionary dictionaryWithObjectsAndKeys:
-                                            [UIFont systemFontOfSize:18],NSFontAttributeName,nil];
+                                        [UIFont systemFontOfSize:18],NSFontAttributeName,nil];
         NSDictionary *monthStyleDict = [NSDictionary dictionaryWithObjectsAndKeys:
-                                            [UIFont systemFontOfSize:10],NSFontAttributeName,nil];
-
+                                        [UIFont systemFontOfSize:10],NSFontAttributeName,nil];
+        
         
         NSString *time2 = [[daysArr[i][@"date"] toDate:@"yyyy-MM-dd"] toString:@"dd\nMM月"];
         NSMutableAttributedString *time1 = [[NSMutableAttributedString alloc]initWithString:time2];
@@ -132,8 +132,8 @@
         [dateLab setTitleColor:TCOL_NORMALETEXT forState:UIControlStateNormal];
         dateLab.titleLabel.textAlignment = NSTextAlignmentCenter;
         dateLab.titleLabel.numberOfLines = 2;
-
-//        dateLab.textColor = COL_MAIN_BLUE;
+        
+        //        dateLab.textColor = COL_MAIN_BLUE;
         dateLab.backgroundColor = [UIColor colorWithRed:0.97f green:0.97f blue:0.97f alpha:1.00f];
         [dateLab addTarget:self action:@selector(dateDown:) forControlEvents:UIControlEventTouchUpInside];
         [BloodSugarScrollview addSubview:dateLab];
@@ -178,9 +178,9 @@
             
             //血糖假数据
             /////////////////////////////////////////////////////////////////////////////////
-//            if (arc4random()%10>4) {
-//                [dayLab setTitle:[NSString stringWithFormat:@"%d.%d",arc4random()%10,arc4random()%10] forState:UIControlStateNormal];
-//            }
+            //            if (arc4random()%10>4) {
+            //                [dayLab setTitle:[NSString stringWithFormat:@"%d.%d",arc4random()%10,arc4random()%10] forState:UIControlStateNormal];
+            //            }
             /////////////////////////////////////////////////////////////////////////////////
             
             [dayLab setTitleColor:TCOL_MAIN forState:UIControlStateNormal];
@@ -189,32 +189,37 @@
             dayLab.titleLabel.textAlignment = NSTextAlignmentCenter;
             [dayLab setBackgroundColor:TCOL_MAIN forState:UIControlStateSelected];
             [dayLab setBackgroundColor:TCOL_BG forState:UIControlStateNormal];
-
             
             if (dayLab.lbl.text.length!=0) {
-//                if ([dayLab.lbl.text doubleValue]<=[GL_USERDEFAULTS getDoubleValue:SamTargetLow]) {
-//                    [dayLab setTitleColor:TCOL_GLUCOSLOW forState:UIControlStateNormal];
-//                } else if ([dayLab.lbl.text doubleValue]>=[GL_USERDEFAULTS getDoubleValue:SamTargetHeight]){
-//                    [dayLab setTitleColor:TCOL_GLUCOSEHEIGHT forState:UIControlStateNormal];
-//                }
-                
+                NSDecimalNumber *dayLabValue = [NSDecimalNumber decimalNumberWithString:dayLab.lbl.text];
                 if ([GLTools BloodSugarBeforeOrAfterMeal:[dayArr[(j+7)%8] getIntegerValue:@"TYPE"]] == 1) {
                     //餐前
-                    if ([dayLab.lbl.text doubleValue] < [GL_USERDEFAULTS getDoubleValue:SamFingerRangeBeforeLow]) {
-                        [dayLab setTitleColor:TCOL_GLUCOSLOW forState:UIControlStateNormal];
-                    } else if ([dayLab.lbl.text doubleValue] > [GL_USERDEFAULTS getDoubleValue:SamFingerRangeBeforeHigh]){
-                        [dayLab setTitleColor:TCOL_GLUCOSEHEIGHT forState:UIControlStateNormal];
+                    if (([dayLabValue compare:GL_DVALUE([GL_USERDEFAULTS getStringValue:SamFingerRangeBeforeRedLow])] == NSOrderedAscending)
+                        || ([dayLabValue compare:GL_DVALUE([GL_USERDEFAULTS getStringValue:SamFingerRangeBeforeRedHigh])] == NSOrderedDescending)
+                        || ([dayLabValue compare: GL_DVALUE([GL_USERDEFAULTS getStringValue:SamFingerRangeBeforeRedHigh])] == NSOrderedSame)) {
+                        //红色 小于最低值或者大于等于最高值
+                        [dayLab setTitleColor:TCOL_GLUCOSERED forState:UIControlStateNormal];
+                    } else if ([dayLabValue compare:GL_DVALUE([GL_USERDEFAULTS getStringValue:SamFingerRangeBeforeYellowLow])] == NSOrderedDescending
+                               && [dayLabValue compare:GL_DVALUE([GL_USERDEFAULTS getStringValue:SamFingerRangeBeforeYellowHigh])] == NSOrderedAscending){
+                        //黄色 >最低值或者<最高值
+                        [dayLab setTitleColor:TCOL_GLUCOSYELLOW forState:UIControlStateNormal];
                     }
                 } else {
                     //餐后
-                    if ([dayLab.lbl.text doubleValue] < [GL_USERDEFAULTS getDoubleValue:SamFingerRangeAfterLow]) {
-                        [dayLab setTitleColor:TCOL_GLUCOSLOW forState:UIControlStateNormal];
-                    } else if ([dayLab.lbl.text doubleValue] > [GL_USERDEFAULTS getDoubleValue:SamFingerRangeAfterHigh]){
-                        [dayLab setTitleColor:TCOL_GLUCOSEHEIGHT forState:UIControlStateNormal];
+                    if ([dayLabValue compare:GL_DVALUE([GL_USERDEFAULTS getStringValue:SamFingerRangeAfterRedLow])] == NSOrderedAscending
+                        || [dayLabValue compare:GL_DVALUE([GL_USERDEFAULTS getStringValue:SamFingerRangeAfterRedLow])] == NSOrderedSame
+                        || [dayLabValue compare:GL_DVALUE([GL_USERDEFAULTS getStringValue:SamFingerRangeAfterRedHigh])] == NSOrderedDescending
+                        ) {
+                        //红色
+                        [dayLab setTitleColor:TCOL_GLUCOSERED forState:UIControlStateNormal];
+                    } else if ([dayLabValue compare:GL_DVALUE([GL_USERDEFAULTS getStringValue:SamFingerRangeAfterYellowLow])] == NSOrderedDescending
+                               && ([dayLabValue compare:GL_DVALUE([GL_USERDEFAULTS getStringValue:SamFingerRangeAfterYellowHigh])] == NSOrderedAscending || [dayLabValue compare:GL_DVALUE([GL_USERDEFAULTS getStringValue:SamFingerRangeAfterYellowHigh])] == NSOrderedSame)){
+                        //黄色 >最低值或者<= 最高值
+                        [dayLab setTitleColor:TCOL_GLUCOSYELLOW forState:UIControlStateNormal];
                     }
                 }
             }
-
+            
             [BloodSugarScrollview addSubview:dayLab];
         }
     }
@@ -281,3 +286,4 @@
 
 
 @end
+

@@ -39,3 +39,4 @@ typedef void(^typeIndex) (NSInteger);
 + (UIView*)jianCeHeaderTitle:(NSString*)title;
 
 @end
+

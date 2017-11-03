@@ -32,14 +32,31 @@
 #define SamTargetLow @"SamTargetLow"
 //目标最高血糖
 #define SamTargetHeight @"SamTargetHeight"
-//指尖血范围餐前高
-#define SamFingerRangeBeforeHigh @"SamFingerRangeBeforeHigh"
-//指尖血范围餐前低
-#define SamFingerRangeBeforeLow @"SamFingerRangeBeforeLow"
-//指尖血糖范围餐后高
-#define SamFingerRangeAfterHigh @"SamFingerRangeAfterHigh"
-//指尖血糖范围餐后低
-#define SamFingerRangeAfterLow @"SamFingerRangeAfterLow"
+
+//指尖血范围餐前黄色高
+#define SamFingerRangeBeforeYellowHigh @"SamFingerRangeBeforeYellowHigh"
+//指尖血范围餐前黄色低
+#define SamFingerRangeBeforeYellowLow @"SamFingerRangeBeforeYellowLow"
+//指尖血范围餐后黄色高
+#define SamFingerRangeAfterYellowHigh @"SamFingerRangeAfterYellowHigh"
+//指尖血范围餐后黄色低
+#define SamFingerRangeAfterYellowLow @"SamFingerRangeAfterYellowLow"
+//指尖血范围餐前红色高
+#define SamFingerRangeBeforeRedHigh @"SamFingerRangeBeforeRedHigh"
+//指尖血范围餐前红色低
+#define SamFingerRangeBeforeRedLow @"SamFingerRangeBeforeRedLow"
+//指尖血范围餐后红色高
+#define SamFingerRangeAfterRedHigh @"SamFingerRangeAfterRedHigh"
+//指尖血范围餐后红丝低
+#define SamFingerRangeAfterRedLow @"SamFingerRangeAfterRedLow"
+//指尖血范围餐前绿色高
+#define SamFingerRangeBeforeGreenHigh @"SamFingerRangeBeforeGreenHigh"
+//指尖血范围餐前绿色低
+#define SamFingerRangeBeforeGreenLow @"SamFingerRangeBeforeGreenLow"
+//指尖血范围餐后绿色高
+#define SamFingerRangeAfterGreenHigh @"SamFingerRangeAfterGreenHigh"
+//指尖血范围餐后绿色低
+#define SamFingerRangeAfterGreenLow @"SamFingerRangeAfterGreenLow"
 
 //预警过的血糖
 #define SamTargetWarningArr @"SamTargetWarningArr"
@@ -94,3 +111,4 @@
 #define OUTFIELD @"OutField"
 #define INTABLE @"InTable"
 #define OUTTABLE @"OutTable"
+

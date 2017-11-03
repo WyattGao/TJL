@@ -553,7 +553,7 @@
         case 0:
         {
             _pieView = [[Example2PieView alloc]initWithFrame:CGRectMake(10,-20,162, 200)];
-            if (GL_IS_IPHONE5) {
+            if (GL_IS_IP5) {
                 _pieView.x -= 10;
             }
             _pieView.backgroundColor = [UIColor clearColor];

@@ -75,7 +75,7 @@
         case GLRingTimeHintLabelAbNormal:
         {
             self.hintLbl.font      = GL_FONT(18);
-            self.hintLbl.textColor = TCOL_GLUCOSEHEIGHT;
+            self.hintLbl.textColor = TCOL_GLUCOSERED;
             self.hintLbl.text      = [NSString stringWithFormat:@"%ld点到%@\n您的血糖共出现\n%ld次异常",hour,selectHourStr,abnormalCount];
 
         }

@@ -121,7 +121,12 @@ typedef NS_ENUM(NSInteger,GLRecordWearingTimeType){
     WS(ws);
     
     [self.xueTangView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(ws.view).with.insets(UIEdgeInsetsMake(64, 0, 0, 0));
+        if (@available(iOS 11.0, *)) {
+            
+            make.edges.equalTo(ws.view).width.insets(UIEdgeInsetsMake([UIApplication sharedApplication].statusBarFrame.size.height + GL_NAVBARHEIGHT, 0, 0, 0));
+        } else {
+            make.edges.equalTo(ws.view).with.insets(UIEdgeInsetsMake(64, 0, 0, 0));
+        }
     }];
 }
 

@@ -11,9 +11,9 @@
 
 @interface TrainingCampViewController ()<WKNavigationDelegate>
 
-@property (nonatomic,strong)  WKWebView *webView;
+@property (nonatomic,strong) WKWebView *webView;
 
-@property (nonatomic,strong)  UILabel *hintLbl;
+@property (nonatomic,strong) UILabel *hintLbl;
 
 @end
 
@@ -24,9 +24,15 @@
     // Do any additional setup after loading the view.
 }
 
+//修改状态栏文字颜色
+- (BOOL)prefersStatusBarHidden
+{
+    return true;
+}
+
 - (void)navRightBtnClick:(UIButton *)sender
 {
-    [_webView loadRequest:[NSURLRequest requestWithURL:GL_URL(@"http://xly.tangjiaolian.cn")]];
+    [_webView loadRequest:[NSURLRequest requestWithURL:GL_URL(URL_XLY)]];
 }
 
 //WkWebViewDelegate
@@ -55,16 +61,16 @@
 {
     [self setNavHide:true];
     
-//    [self setNavTitle:@"训练营"];
-//    [self setRightBtnImgNamed:@"刷新-白"];
-   
+    //    [self setNavTitle:@"训练营"];
+    //    [self setRightBtnImgNamed:@"刷新-白"];
+    
     [self addSubView:self.webView];
     [self addSubView:self.hintLbl];
     
     WS(ws);
     
     [self.webView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(ws.view).with.insets(UIEdgeInsetsMake(0, 0, 0, 0));
+        make.edges.equalTo(ws.view).with.insets(UIEdgeInsetsMake(GL_STATUESBAR_HEIGHT, 0, 0, 0));
     }];
     
     [self.hintLbl mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -78,7 +84,8 @@
 {
     if (!_webView) {
         _webView                    = [WKWebView new];
-        [_webView loadRequest:[NSURLRequest requestWithURL:GL_URL(@"http://xly.tangjiaolian.cn")]];
+        _webView.backgroundColor    = [UIColor blackColor];
+        [_webView loadRequest:[NSURLRequest requestWithURL:GL_URL(URL_XLY)]];
         _webView.navigationDelegate = self;
         if (@available(iOS 11.0, *)) { //iOS11不自动调整状态栏
             _webView.scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
@@ -109,13 +116,14 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
+

@@ -87,7 +87,8 @@
 
 - (NSArray *)vcArr
 {
-    return @[[STLogController new],
+    return @[[XueTangViewController new],
+             [STLogController new],
              [TrainingCampViewController new],
              [MallViewController new],
              [WoViewController new]];
@@ -96,15 +97,15 @@
 - (NSArray *)vcTitleArr
 {
 //    return @[@"动态血糖",@"服务",@"锦囊",@"我"];
-//    return @[@"动态血糖",@"指尖血",@"训练营",@"商城",@"我"];
-    return @[@"指尖血",@"训练营",@"商城",@"我"];
+    return @[@"动态血糖",@"指尖血",@"训练营",@"商城",@"我"];
+//    return @[@"指尖血",@"训练营",@"商城",@"我"];
 }
 
 - (NSArray *)vcNorWithSelIconArr
 {
 //    return @[@[@"动态血糖",@"服务",@"锦囊",@"我"],@[@"动态血糖-选中",@"服务-选中",@"锦囊-选中",@"我-选中"]];
-//    return @[@[@"动态血糖",@"指尖血",@"训练营",@"商城",@"我"],@[@"动态血糖-选中",@"指尖血-选中",@"",@"商城-选中",@"我-选中"]];
-    return @[@[@"指尖血",@"训练营",@"商城",@"我"],@[@"指尖血-选中",@"",@"商城-选中",@"我-选中"]];
+    return @[@[@"动态血糖",@"指尖血",@"训练营",@"商城",@"我"],@[@"动态血糖-选中",@"指尖血-选中",@"",@"商城-选中",@"我-选中"]];
+//    return @[@[@"指尖血",@"训练营",@"商城",@"我"],@[@"指尖血-选中",@"",@"商城-选中",@"我-选中"]];
 }
 
 /**
@@ -114,7 +115,7 @@
  */
 - (UIViewController *)getYZViewController
 {
-    UIViewController *yzViewController = [[YZNViewManager defaultManager] viewControllerForUrl:GL_URL(YZMALL_URL)];
+    UIViewController *yzViewController = [[YZNViewManager defaultManager] viewControllerForUrl:GL_URL(URL_YZMALL)];
     yzViewController.navigationController.navigationBar .barTintColor       = TCOL_NAVBAR;
     yzViewController.navigationController.navigationBar .barStyle           = UIBarStyleBlack;
     yzViewController.navigationController.navigationBar .tintColor          = [UIColor whiteColor];
