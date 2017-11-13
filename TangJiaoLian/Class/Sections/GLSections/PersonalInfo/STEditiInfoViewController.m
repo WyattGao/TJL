@@ -49,7 +49,7 @@
 - (void)createUI
 {
     _mainTV = [[UITableView alloc]initWithFrame:self.view.frame];
-
+    
     [self.view addSubview:_mainTV];
     
     _mainTV.delegate        = self;
@@ -138,7 +138,7 @@
         [cell.contentView addSubview:getCodeBtn];
         [cell.contentView addSubview:codeTF];
         [cell.contentView addSubview:lineView];
-
+        
         getCodeBtn.tag                = 100;
         getCodeBtn.backgroundColor    = TCOL_MAIN;
         getCodeBtn.titleLabel.font    = GL_FONT(16);
@@ -172,18 +172,18 @@
             make.height.equalTo(@1);
             make.bottom.equalTo(cell.contentView);
         }];
-
+        
     } else if(indexPath.row == 2 && _editiStyle == BingDingPhone){
         UITextField *passWordTF = [UITextField new];
         [cell.contentView addSubview:passWordTF];
-       
+        
         
         passWordTF.keyboardType  = UIKeyboardTypeASCIICapable;
         passWordTF.placeholder   = @"请设置密码";
         passWordTF.font          = GL_FONT(15);
         passWordTF.tag           = 12;
-
-       
+        
+        
         
         [passWordTF mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(cell.contentView).offset(15);
@@ -191,7 +191,7 @@
             make.centerY.equalTo(cell.contentView);
             make.height.equalTo(@42);
         }];
-
+        
     }
     return cell;
 }
@@ -206,8 +206,8 @@
     NSDictionary *postDic = @{
                               FUNCNAME : @"send_sms",
                               INFIELD  : @{
-                                            @"PHONE" : [(UITextField *)[self.view viewWithTag:10] text],
-                                           },
+                                      @"PHONE" : [(UITextField *)[self.view viewWithTag:10] text],
+                                      },
                               OUTFIELD : @[]
                               };
     [GL_Requst postWithParameters:postDic SvpShow:true success:^(GLRequest *request, id response) {
@@ -256,45 +256,56 @@
 
 - (void)navLeftBtnClick:(UIButton *)sender
 {
+    [super navLeftBtnClick:sender];
     if (_editiStyle == NikeName) {
-        [self rightBtnDown:nil];
+        //        [self rightBtnDown:nil];
+    }
+}
+
+- (void)didMoveToParentViewController:(UIViewController*)parent{
+    [super didMoveToParentViewController:parent];
+    NSLog(@"%s,%@",__FUNCTION__,parent);
+    if(!parent){
+        if (_editiStyle == NikeName) {
+            [self rightBtnDown:nil];
+        }
     }
 }
 
 - (void)rightBtnDown:(UIButton *)btn
 {
     if (_editiStyle == BingDingPhone) {
-    UITextField *phoneTF = (UITextField *)[self.view viewWithTag:10];
-    UITextField *codeTF  = (UITextField *)[self.view viewWithTag:11];
-    UITextField *passTF  = (UITextField *)[self.view viewWithTag:12];
+        UITextField *phoneTF = (UITextField *)[self.view viewWithTag:10];
+        UITextField *codeTF  = (UITextField *)[self.view viewWithTag:11];
+        UITextField *passTF  = (UITextField *)[self.view viewWithTag:12];
         if ([[(UITextField *)[self.view viewWithTag:10] text] length] != 11/*||!isTure*/){
             GL_ALERT_E(@"请输入正确的手机号码");
             return;
         }
-    if (!phoneTF.text.length){
-        GL_ALERT_E(@"请输入正确的手机号码");
-        return;
-    }
-    if (!codeTF.text.length) {
-        GL_ALERT_E(@"请输入验证码");
-        return;
-    }
-    if (!passTF.text.length) {
-        GL_ALERT_E(@"请输入密码");
-        return;
-    }
+        if (!phoneTF.text.length){
+            GL_ALERT_E(@"请输入正确的手机号码");
+            return;
+        }
+        if (!codeTF.text.length) {
+            GL_ALERT_E(@"请输入验证码");
+            return;
+        }
+        if (!passTF.text.length) {
+            GL_ALERT_E(@"请输入密码");
+            return;
+        }
         if (passTF.text.length<6) {
             GL_ALERT_E(@"密码长度小于6位数");
             return;
         }
-    NSDictionary *postDic = @{
-                              FUNCNAME : @"checkVerifyCode",
-                              INFIELD  : @{
-                                            @"PHONE" : phoneTF.text,
-                                            @"VERIFYCODE" : codeTF.text
-                                        },
-                              OUTFIELD : @[]
-                              };
+        NSDictionary *postDic = @{
+                                  FUNCNAME : @"checkVerifyCode",
+                                  INFIELD  : @{
+                                          @"PHONE" : phoneTF.text,
+                                          @"VERIFYCODE" : codeTF.text
+                                          },
+                                  OUTFIELD : @[]
+                                  };
         [GL_Requst postWithParameters:postDic SvpShow:true success:^(GLRequest *request, id response) {
             if ([response[@"Tag"]isEqualToString:@"0"]) {
                 GL_ALERT_E(response[@"Message"]);
@@ -305,13 +316,12 @@
             } else {
                 GL_ALERT_E([[[response objectForKey:@"Result"] objectForKey:@"OutField"] getStringValue:@"RETMSG"]);
             }
-
+            
         } failure:^(GLRequest *request, NSError *error) {
             GL_AFFAil;
         }];
     } else {
         [self.delegate getEditiContent:[(UITextField *)[self.view viewWithTag:10] text]];
-        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 
@@ -344,3 +354,4 @@
 }
 
 @end
+

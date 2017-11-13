@@ -312,6 +312,7 @@
 		2688A5931F41919D00657707 /* Blocks.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2688A5921F41919D00657707 /* Blocks.gif */; };
 		2688A5961F41965B00657707 /* XueTangRecordBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 2688A5951F41965B00657707 /* XueTangRecordBtn.m */; };
 		268AEBEB1F6628BD00E29E0C /* BloodGlucoseDateSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 268AEBEA1F6628BD00E29E0C /* BloodGlucoseDateSelectionView.m */; };
+		2690E03D1FB19F8900B4D95A /* NSData+GL.m in Sources */ = {isa = PBXBuildFile; fileRef = 2690E03C1FB19F8800B4D95A /* NSData+GL.m */; };
 		269A664B1F555724002E7163 /* UIViewController+BackButtonHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 269A664A1F555724002E7163 /* UIViewController+BackButtonHandler.m */; };
 		269A664F1F5561BE002E7163 /* WoEnterPhoneNumberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 269A664E1F5561BE002E7163 /* WoEnterPhoneNumberViewController.m */; };
 		269A66521F556601002E7163 /* WoEnterPhoneNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 269A66511F556601002E7163 /* WoEnterPhoneNumberView.m */; };
@@ -487,7 +488,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 263949B41F53BA36009BB8AC /* Charts.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 06165F231D8110E600722320;
+			remoteGlobalIDString = A58A4ED274A941CA248EA921;
 			remoteInfo = Charts;
 		};
 		26CCA8B21E77FB57001D0E05 /* PBXContainerItemProxy */ = {
@@ -1011,6 +1012,8 @@
 		2688A5951F41965B00657707 /* XueTangRecordBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XueTangRecordBtn.m; sourceTree = "<group>"; };
 		268AEBE91F6628BD00E29E0C /* BloodGlucoseDateSelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BloodGlucoseDateSelectionView.h; sourceTree = "<group>"; };
 		268AEBEA1F6628BD00E29E0C /* BloodGlucoseDateSelectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BloodGlucoseDateSelectionView.m; sourceTree = "<group>"; };
+		2690E03B1FB19F8800B4D95A /* NSData+GL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+GL.h"; sourceTree = "<group>"; };
+		2690E03C1FB19F8800B4D95A /* NSData+GL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+GL.m"; sourceTree = "<group>"; };
 		269A66491F555724002E7163 /* UIViewController+BackButtonHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+BackButtonHandler.h"; sourceTree = "<group>"; };
 		269A664A1F555724002E7163 /* UIViewController+BackButtonHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+BackButtonHandler.m"; sourceTree = "<group>"; };
 		269A664D1F5561BE002E7163 /* WoEnterPhoneNumberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WoEnterPhoneNumberViewController.h; sourceTree = "<group>"; };
@@ -2612,6 +2615,8 @@
 		26A233F01E7B89CD0042BA09 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				2690E03B1FB19F8800B4D95A /* NSData+GL.h */,
+				2690E03C1FB19F8800B4D95A /* NSData+GL.m */,
 				269A66491F555724002E7163 /* UIViewController+BackButtonHandler.h */,
 				269A664A1F555724002E7163 /* UIViewController+BackButtonHandler.m */,
 				26A233F11E7B8A070042BA09 /* UIView+GL.h */,
@@ -4041,6 +4046,7 @@
 				26394AB81F53BBC1009BB8AC /* LineChartDataProvider.swift in Sources */,
 				26181B1E1E8D1C7E00883EE9 /* UIImage+GL.m in Sources */,
 				26394A781F53BBC1009BB8AC /* ChartBaseDataSet.swift in Sources */,
+				2690E03D1FB19F8900B4D95A /* NSData+GL.m in Sources */,
 				26394AA11F53BBC1009BB8AC /* DefaultAxisValueFormatter.swift in Sources */,
 				2643B7A61ED92143003B8A0F /* WoChangePassWordWihPhoneFinishViewController.m in Sources */,
 				26D0B1CB1E820EC2009F1774 /* JKPromptView.m in Sources */,
@@ -4308,12 +4314,14 @@
 					"$(PROJECT_DIR)/TangJiaoLian/Class/Vendors/EaseUI/EMUIKit/3rdparty/DeviceHelper/VoiceConvert/opencore-amrnb",
 					"$(PROJECT_DIR)/TangJiaoLian/Class/Vendors/EaseUI/EMUIKit/3rdparty/DeviceHelper/VoiceConvert/opencore-amrwb",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = cn.tangjiaolian.TangJiaoLian;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TangJiaoLian/TangJiaoLian-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Debug;
 		};
@@ -4346,11 +4354,13 @@
 					"$(PROJECT_DIR)/TangJiaoLian/Class/Vendors/EaseUI/EMUIKit/3rdparty/DeviceHelper/VoiceConvert/opencore-amrnb",
 					"$(PROJECT_DIR)/TangJiaoLian/Class/Vendors/EaseUI/EMUIKit/3rdparty/DeviceHelper/VoiceConvert/opencore-amrwb",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = cn.tangjiaolian.TangJiaoLian;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TangJiaoLian/TangJiaoLian-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Release;
 		};

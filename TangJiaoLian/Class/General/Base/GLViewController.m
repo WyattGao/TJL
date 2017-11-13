@@ -43,14 +43,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-
+    
     self.navigationController.navigationBar.translucent  = true;
     self.view.backgroundColor                            = TCOL_BG;
     self.navigationController.navigationBar.barTintColor = TCOL_NAVBAR;
     self.automaticallyAdjustsScrollViewInsets            = false;
     //修改状态栏颜色为白色
     self.navigationController.navigationBar.barStyle     = UIBarStyleBlack;
-
+    
     //设置默认返回按钮
     UIBarButtonItem *item                                = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationController.navigationBar.tintColor    = [UIColor whiteColor];
@@ -61,13 +61,18 @@
     [self.reloadView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(ws.view).with.insets(UIEdgeInsetsMake(0, 0, 0, 0));
     }];
-
+    
     [self createUI];
     [self createData];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle{
     return UIStatusBarStyleLightContent;//白色
+}
+
+- (BOOL)prefersStatusBarHidden
+{
+    return false;
 }
 
 - (void)createUI{}
@@ -93,36 +98,37 @@
 - (void)setLeftBtnImgNamed:(NSString *)imgNamed
 {
     if (!imgNamed) {
-//        imgNamed = @"返回";
+        imgNamed = @"返回";
         
-        UIBarButtonItem *item                             = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:nil action:nil];
-        self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-        self.navigationItem.backBarButtonItem             = item;
+        //        UIBarButtonItem *item                             = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(navLeftBtnClick:)];
+        //        self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+        //        self.navigationItem.backBarButtonItem             = item;
     } else {
-        UIButton *fanHuiButton                = [UIButton buttonWithType:UIButtonTypeCustom];
-        fanHuiButton.frame                    = CGRectMake(0, 0, 44, 44);
-        fanHuiButton.imageEdgeInsets          = UIEdgeInsetsMake(0, -40, 0, 0);
-        [fanHuiButton setImage:[UIImage imageNamed:imgNamed] forState:UIControlStateNormal];
-        [fanHuiButton setImage:[UIImage imageNamed:imgNamed] forState:UIControlStateHighlighted];
-        [fanHuiButton addTarget:self action:@selector(navLeftBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-        
-        UIBarButtonItem *leftItem             = [[UIBarButtonItem alloc] initWithCustomView:fanHuiButton];
-        self.navigationItem.leftBarButtonItem = leftItem;
     }
+    UIButton *fanHuiButton                = [UIButton buttonWithType:UIButtonTypeCustom];
+    fanHuiButton.frame                    = CGRectMake(0, 0, 44, 44);
+    fanHuiButton.imageEdgeInsets          = UIEdgeInsetsMake(0, -40, 0, 0);
+    [fanHuiButton setImage:[UIImage imageNamed:imgNamed] forState:UIControlStateNormal];
+    [fanHuiButton setImage:[UIImage imageNamed:imgNamed] forState:UIControlStateHighlighted];
+    [fanHuiButton addTarget:self action:@selector(navLeftBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *leftItem             = [[UIBarButtonItem alloc] initWithCustomView:fanHuiButton];
+    self.navigationItem.leftBarButtonItem = leftItem;
+    
 }
 
 - (void)setRightBtnImgNamed:(NSString *)imgNamed
 {
-   UIButton *rightBtn                     = [UIButton buttonWithType:UIButtonTypeCustom];
-   rightBtn.frame                         = CGRectMake(0, 0, 44, 44);
-   rightBtn.imageEdgeInsets               = UIEdgeInsetsMake(0, 20, 0, 0);
-
+    UIButton *rightBtn                     = [UIButton buttonWithType:UIButtonTypeCustom];
+    rightBtn.frame                         = CGRectMake(0, 0, 44, 44);
+    rightBtn.imageEdgeInsets               = UIEdgeInsetsMake(0, 20, 0, 0);
+    
     [rightBtn setTitleColor:RGB(74, 74, 74) forState:UIControlStateNormal];
     [rightBtn setImage:[UIImage imageNamed:imgNamed] forState:UIControlStateNormal];
     [rightBtn addTarget:self action:@selector(navRightBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     
-   UIBarButtonItem *rightItem             = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
-   self.navigationItem.rightBarButtonItem = rightItem;
+    UIBarButtonItem *rightItem             = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
+    self.navigationItem.rightBarButtonItem = rightItem;
 }
 
 - (void)setRightBtnTitle:(NSString *)title
@@ -238,16 +244,16 @@
 
 - (void)navRightBtnClick:(UIButton *)sender
 {
-
+    
 }
 
 - (void)dismissClick:(UIButton *)sender
 {
     WS(ws);
     dispatch_async(dispatch_get_main_queue(), ^{
-       [ws dismissViewControllerAnimated:true completion:^{
-           
-       }];
+        [ws dismissViewControllerAnimated:true completion:^{
+            
+        }];
     });
 }
 
@@ -304,13 +310,14 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
+
