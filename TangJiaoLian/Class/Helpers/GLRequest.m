@@ -71,6 +71,9 @@
         case API_YZ:
             urlString = URL_YZLOGIN;
             break;
+        case API_WECHAT:
+            urlString = HOST_WECHATURL;
+            break;
         default:
             break;
     }
@@ -85,8 +88,10 @@
         
         NSLog(@"%@",uploadProgress);
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
         NSString* responseJson = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
+        if ([[parameters getStringValue:FUNCNAME] isEqualToString:@"wxSendModel"]) { //此接口沒有返回值
+            responseJson = @"";
+        }
         NSLog(@"[GLRequest]: %@",responseJson);
         
         NSData *responseData = [responseJson dataUsingEncoding:NSUTF8StringEncoding];

@@ -4315,7 +4315,7 @@
 					"$(PROJECT_DIR)/TangJiaoLian/Class/Vendors/EaseUI/EMUIKit/3rdparty/DeviceHelper/VoiceConvert/opencore-amrwb",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = cn.tangjiaolian.TangJiaoLian;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.tangjiaolian.TangJiaoLianCGM;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TangJiaoLian/TangJiaoLian-Bridging-Header.h";
@@ -4355,7 +4355,7 @@
 					"$(PROJECT_DIR)/TangJiaoLian/Class/Vendors/EaseUI/EMUIKit/3rdparty/DeviceHelper/VoiceConvert/opencore-amrwb",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = cn.tangjiaolian.TangJiaoLian;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.tangjiaolian.TangJiaoLianCGM;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TangJiaoLian/TangJiaoLian-Bridging-Header.h";

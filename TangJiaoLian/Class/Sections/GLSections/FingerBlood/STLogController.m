@@ -45,6 +45,10 @@
 
 @property (nonatomic,strong) SlideRuleView *slideRuleView;
 
+@property (nonatomic,assign) BOOL isQuickRecord; /**< 是否是3Dtouch记录血糖 */
+
+@property (nonatomic,strong) UIFeedbackGenerator *feedbackGenerator;
+
 @end
 
 @implementation STLogController
@@ -195,6 +199,9 @@
                 BloodSugarScrollview = [STLogView makeBloodSugarScrollview:TypeScrollview andSelectYear:year andMonth:month andData:BloodArr];
                 [ws bloodArrHaveData];
                 [ws.reloadView setHidden:true];
+                if (self.isQuickRecord) {
+                    //                    [self bloodClick:(NSNotification *)]
+                }
             } else {
                 GL_ALERT_E(GETRETMSG);
                 if (!BloodArr.count) {
@@ -310,6 +317,14 @@
 
 #pragma mark - 添加修改血糖
 - (void)bloodClick:(NSNotification*)not{
+    
+    //震动反馈
+    if (__IOS10_OR_LATER) {
+        self.feedbackGenerator = [[UIImpactFeedbackGenerator alloc]initWithStyle:UIImpactFeedbackStyleMedium];
+        [self.feedbackGenerator prepare];
+        [(UIImpactFeedbackGenerator *)self.feedbackGenerator impactOccurred];
+    }
+    
     NSDictionary *dic  = [not object];
     NSDictionary *dicc = BloodArr[[dic[@"i"] intValue]][@"result"][[dic[@"j"] intValue]];
     GLButton *btn      = [dic objectForKey:@"btn"];
@@ -332,17 +347,29 @@
         //修改按钮标题为新值
         [btn setTitle:[NSString stringWithFormat:@"%.1lf",value/10.0f]  forState:UIControlStateNormal];
         
-        if ([GLTools BloodSugarBeforeOrAfterMeal:[dicc getIntegerValue:@"TYPE"]] == 1) {
-            //餐前
-            if ([btn.text floatValue] >= [GL_USERDEFAULTS getFloatValue:SamFingerRangeBeforeYellowHigh] || [btn.text floatValue] <= [GL_USERDEFAULTS getFloatValue:SamFingerRangeBeforeYellowLow]) {
+        //时间段：餐前餐后
+        NSString *timeType = [dicc getStringValue:@"TYPE"];
+        //血糖值的十进制数
+        NSDecimalNumber *dayLabValue = [NSDecimalNumber decimalNumberWithString:btn.text];
+        //餐前
+        if ([GLTools BloodSugarBeforeOrAfterMeal:[timeType integerValue]] == 1) {
+            if (([dayLabValue compare:GL_DVALUE([GL_USERDEFAULTS getStringValue:SamFingerRangeBeforeRedLow])] == NSOrderedAscending)
+                || ([dayLabValue compare:GL_DVALUE([GL_USERDEFAULTS getStringValue:SamFingerRangeBeforeRedHigh])] == NSOrderedDescending)
+                || ([dayLabValue compare: GL_DVALUE([GL_USERDEFAULTS getStringValue:SamFingerRangeBeforeRedHigh])] == NSOrderedSame)) {
+                //红色 小于最低值或者大于等于最高值
                 isAbnormal = @"1";
             }
         } else {
             //餐后
-            if ([btn.text floatValue] > [GL_USERDEFAULTS getFloatValue:SamFingerRangeAfterYellowHigh] || [btn.text floatValue] <= [GL_USERDEFAULTS getFloatValue:SamFingerRangeAfterYellowLow]) {
+            if ([dayLabValue compare:GL_DVALUE([GL_USERDEFAULTS getStringValue:SamFingerRangeAfterRedLow])] == NSOrderedAscending
+                || [dayLabValue compare:GL_DVALUE([GL_USERDEFAULTS getStringValue:SamFingerRangeAfterRedLow])] == NSOrderedSame
+                || [dayLabValue compare:GL_DVALUE([GL_USERDEFAULTS getStringValue:SamFingerRangeAfterRedHigh])] == NSOrderedDescending
+                ) {
+                //红色
                 isAbnormal = @"1";
             }
         }
+
         
         NSDictionary *postDic = @{
                                   FUNCNAME : @"saveBloodValue",
@@ -352,9 +379,9 @@
                                                   @{
                                                       @"ACCOUNT" : USER_ACCOUNT,
                                                       @"COUNTS" : btn.text,
-                                                      @"TYPE" : [@([dicc getIntegerValue:@"TYPE"]) stringValue],
+                                                      @"TYPE" : timeType,
                                                       @"DATE" : [BloodArr[[dic[@"i"] intValue]] getStringValue:@"date"],
-                                                      @"ISABNORMAL" : isAbnormal
+                                                      @"ISABNORMAL" : isAbnormal //血糖值是否异常:0否1是
                                                       }
                                                   ]
                                           }
@@ -362,9 +389,20 @@
         [GL_Requst postWithParameters:postDic SvpShow:true success:^(GLRequest *request, id response) {
             if (GETTAG) {
                 if (GETRETVAL) {
+                    
+                    if (__IOS10_OR_LATER) {
+                        //记录成功震动反馈
+                        self.feedbackGenerator = [UINotificationFeedbackGenerator new];
+                        [self.feedbackGenerator prepare];
+                        [(UINotificationFeedbackGenerator *)self.feedbackGenerator notificationOccurred:UINotificationFeedbackTypeSuccess];
+                    }
+                    
                     [btn setTitleColor:TCOL_MAIN forState:UIControlStateNormal];
                     //刷新数据，获取ID
                     [self loadBloodSugar];
+                    if ([isAbnormal isEqualToString:@"1"]) {
+                        [self disposeIsAbnormalValue:btn.text WithType:timeType];
+                    }
                 } else {
                     GL_ALERTCONTR(nil, GETRETMSG);
                     [btn setTitle:btnStr  forState:UIControlStateNormal];
@@ -406,6 +444,33 @@
     }];
 }
 
+
+
+
+/**
+ 处理异常值
+
+ @param value 血糖值
+ @param type 时间段
+ */
+- (void)disposeIsAbnormalValue:(NSString *)value WithType:(NSString *)type
+{
+    NSDictionary *postDic = @{
+                              FUNCNAME : @"wxSendModel",
+                              @"blood_value" : value,
+                              @"type" : type,
+                              @"userid" : USER_ID
+                              };
+    [GL_Requst POST:API_WECHAT parameters:postDic SvpShow:true success:^(GLRequest *request, id response) {
+        if (GETTAG) {
+            if (GETRETVAL) {
+            }
+        }
+    } failure:^(GLRequest *request, NSError *error) {
+        
+    }];
+}
+
 - (SlideRuleView *)slideRuleView
 {
     if (!_slideRuleView) {
@@ -414,6 +479,12 @@
     return _slideRuleView;
 }
 
+- (UIFeedbackGenerator *)feedbackGenerator
+{
+    if (!_feedbackGenerator) {
+        _feedbackGenerator = [UIFeedbackGenerator new];
+    }
+    return _feedbackGenerator;
+}
 
 @end
-

@@ -93,7 +93,7 @@
     switch ([shortcutItem.type integerValue]) {
         case 0:
             if (ISLOGIN) {
-                
+                _tabBarVC.selectedIndex = 1;
             }
             break;
             

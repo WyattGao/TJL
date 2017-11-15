@@ -14,6 +14,7 @@
 typedef NS_ENUM(NSInteger,APIType) {
     API_HOST = 0,  /**< 糖教练接口 */
     API_YZ = 1, /**< 有赞接口 */
+    API_WECHAT = 2 /**< 微信接口 */
 };
 
 @class GLRequest;
@@ -69,13 +70,6 @@ typedef NS_ENUM(NSInteger,APIType) {
      SvpShow:(BOOL)show
      success:(void (^)(GLRequest *request, id response))success
      failure:(void (^)(GLRequest *request, NSError *error))failure;
-
--(void)postWithAPIType:(APIType)type
-            Parameters:(NSDictionary *)parameters
-               SvpShow:(BOOL)show
-               success:(void (^)(GLRequest *, id))success
-               failure:(void (^)(GLRequest *, NSError *))failure;
-
 
 - (void)postWithParameters:(NSDictionary *)parameters
          SvpShow:(BOOL)show

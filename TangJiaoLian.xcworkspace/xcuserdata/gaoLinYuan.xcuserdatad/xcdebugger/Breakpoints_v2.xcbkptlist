@@ -19,61 +19,94 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TangJiaoLian/Class/Sections/GLSections/XueTang/XueTangViewController.m"
-            timestampString = "531381196.387702"
+            filePath = "TangJiaoLian/Class/Sections/GLSections/FingerBlood/STLogController.m"
+            timestampString = "532342404.636312"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
-            landmarkName = "-createUI"
+            startingLineNumber = "356"
+            endingLineNumber = "356"
+            landmarkName = "-bloodClick:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TangJiaoLian/Class/Sections/GLSections/FingerBlood/STLogController.m"
+            timestampString = "532342404.63668"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "364"
+            endingLineNumber = "364"
+            landmarkName = "-bloodClick:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TangJiaoLian/Class/Sections/GLSections/FingerBlood/STLogController.m"
+            timestampString = "532342404.636948"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "464"
+            endingLineNumber = "464"
+            landmarkName = "-disposeIsAbnormalValue:WithType:"
             landmarkType = "7">
             <Locations>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "__33-[XueTangViewController createUI]_block_invoke"
+                  symbolName = "-[STLogController disposeIsAbnormalValue:WithType:]"
                   moduleName = "TangJiaoLian"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/gaoLinYuan/Library/Mobile%20Documents/com~apple~CloudDocs/%E5%B7%A5%E7%A8%8B%E9%A1%B9%E7%9B%AE/TangJiaoLian0804/TangJiaoLian/Class/Sections/GLSections/XueTang/XueTangViewController.m"
-                  timestampString = "531380833.983382"
+                  urlString = "file:///Users/gaoLinYuan/Library/Mobile%20Documents/com~apple~CloudDocs/%E5%B7%A5%E7%A8%8B%E9%A1%B9%E7%9B%AE/TangJiaoLian0804/TangJiaoLian/Class/Sections/GLSections/FingerBlood/STLogController.m"
+                  timestampString = "532342404.986982"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "125"
-                  endingLineNumber = "125"
-                  offsetFromSymbolStart = "460">
+                  startingLineNumber = "464"
+                  endingLineNumber = "464"
+                  offsetFromSymbolStart = "380">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "__copy_helper_block_.52"
+                  symbolName = "__51-[STLogController disposeIsAbnormalValue:WithType:]_block_invoke"
                   moduleName = "TangJiaoLian"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/gaoLinYuan/Library/Mobile%20Documents/com~apple~CloudDocs/%E5%B7%A5%E7%A8%8B%E9%A1%B9%E7%9B%AE/TangJiaoLian0804/TangJiaoLian/Class/Sections/GLSections/XueTang/XueTangViewController.m"
-                  timestampString = "531380833.985768"
+                  urlString = "file:///Users/gaoLinYuan/Library/Mobile%20Documents/com~apple~CloudDocs/%E5%B7%A5%E7%A8%8B%E9%A1%B9%E7%9B%AE/TangJiaoLian0804/TangJiaoLian/Class/Sections/GLSections/FingerBlood/STLogController.m"
+                  timestampString = "532342404.989235"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "125"
-                  endingLineNumber = "125"
-                  offsetFromSymbolStart = "52">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__destroy_helper_block_.53"
-                  moduleName = "TangJiaoLian"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/gaoLinYuan/Library/Mobile%20Documents/com~apple~CloudDocs/%E5%B7%A5%E7%A8%8B%E9%A1%B9%E7%9B%AE/TangJiaoLian0804/TangJiaoLian/Class/Sections/GLSections/XueTang/XueTangViewController.m"
-                  timestampString = "531380833.987751"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "125"
-                  endingLineNumber = "125"
-                  offsetFromSymbolStart = "28">
+                  startingLineNumber = "465"
+                  endingLineNumber = "465"
+                  offsetFromSymbolStart = "88">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TangJiaoLian/Class/Sections/GLSections/FingerBlood/STLogController.m"
+            timestampString = "532342561.685619"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "465"
+            endingLineNumber = "465"
+            landmarkName = "-disposeIsAbnormalValue:WithType:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
