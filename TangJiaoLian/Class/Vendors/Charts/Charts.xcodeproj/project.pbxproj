@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00B8BF5901C2D220357B0B2A /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41DDB768A1D033A34F0EF9E0 /* Media.xcassets */; };
 		00BC23EF0E04E17188344403 /* BarChartDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7184C8A5A60A3522AB9B05 /* BarChartDataProvider.swift */; };
 		02A6E6E1A82A27A66B8D08C4 /* MoveViewJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266E162DA8B29D9AEB6A9397 /* MoveViewJob.swift */; };
 		03960E8148C6AEDACE4B77CC /* IMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596963A429D485E3894C4666 /* IMarker.swift */; };
@@ -200,7 +199,6 @@
 		3ED23C354AFE81818D78E645 /* Platform.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Platform.swift; path = Source/Charts/Utils/Platform.swift; sourceTree = "<group>"; };
 		3F8146ABC9FC311AF8CA699C /* CandleChartDataProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CandleChartDataProvider.swift; path = Source/Charts/Interfaces/CandleChartDataProvider.swift; sourceTree = "<group>"; };
 		3FDA09EF973925A110506799 /* ChartUtils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ChartUtils.swift; path = Source/Charts/Utils/ChartUtils.swift; sourceTree = "<group>"; };
-		41DDB768A1D033A34F0EF9E0 /* Media.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; name = Media.xcassets; path = "Tests/Supporting Files/Media.xcassets"; sourceTree = "<group>"; };
 		429E88F2729735DC092EE556 /* ILineChartDataSet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ILineChartDataSet.swift; path = Source/Charts/Data/Interfaces/ILineChartDataSet.swift; sourceTree = "<group>"; };
 		45C6D3723C4E001B119CA0C8 /* BarLineChartViewBase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BarLineChartViewBase.swift; path = Source/Charts/Charts/BarLineChartViewBase.swift; sourceTree = "<group>"; };
 		45E31A4356CC6F283C29954B /* LineRadarChartDataSet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LineRadarChartDataSet.swift; path = Source/Charts/Data/Implementations/Standard/LineRadarChartDataSet.swift; sourceTree = "<group>"; };
@@ -560,7 +558,6 @@
 			isa = PBXGroup;
 			children = (
 				C574E1BC7E12D937A5471EF8 /* Info.plist */,
-				41DDB768A1D033A34F0EF9E0 /* Media.xcassets */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -752,7 +749,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00B8BF5901C2D220357B0B2A /* Media.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

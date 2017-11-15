@@ -351,8 +351,9 @@
         NSString *timeType = [dicc getStringValue:@"TYPE"];
         //血糖值的十进制数
         NSDecimalNumber *dayLabValue = [NSDecimalNumber decimalNumberWithString:btn.text];
+        NSInteger beforeOrAfter = [GLTools BloodSugarBeforeOrAfterMeal:[timeType integerValue]];
         //餐前
-        if ([GLTools BloodSugarBeforeOrAfterMeal:[timeType integerValue]] == 1) {
+        if (beforeOrAfter == 1) {
             if (([dayLabValue compare:GL_DVALUE([GL_USERDEFAULTS getStringValue:SamFingerRangeBeforeRedLow])] == NSOrderedAscending)
                 || ([dayLabValue compare:GL_DVALUE([GL_USERDEFAULTS getStringValue:SamFingerRangeBeforeRedHigh])] == NSOrderedDescending)
                 || ([dayLabValue compare: GL_DVALUE([GL_USERDEFAULTS getStringValue:SamFingerRangeBeforeRedHigh])] == NSOrderedSame)) {
@@ -369,7 +370,6 @@
                 isAbnormal = @"1";
             }
         }
-
         
         NSDictionary *postDic = @{
                                   FUNCNAME : @"saveBloodValue",
@@ -379,9 +379,9 @@
                                                   @{
                                                       @"ACCOUNT" : USER_ACCOUNT,
                                                       @"COUNTS" : btn.text,
-                                                      @"TYPE" : timeType,
+                                                      @"TYPE" : [@([dicc getIntegerValue:@"TYPE"]) stringValue],
                                                       @"DATE" : [BloodArr[[dic[@"i"] intValue]] getStringValue:@"date"],
-                                                      @"ISABNORMAL" : isAbnormal //血糖值是否异常:0否1是
+                                                      @"ISABNORMAL" : isAbnormal
                                                       }
                                                   ]
                                           }
@@ -401,7 +401,7 @@
                     //刷新数据，获取ID
                     [self loadBloodSugar];
                     if ([isAbnormal isEqualToString:@"1"]) {
-                        [self disposeIsAbnormalValue:btn.text WithType:timeType];
+                        [self disposeIsAbnormalValue:btn.text WithType:[@(beforeOrAfter) stringValue]];
                     }
                 } else {
                     GL_ALERTCONTR(nil, GETRETMSG);
@@ -429,7 +429,7 @@
             
             [GL_Requst postWithParameters:postDic SvpShow:true success:^(GLRequest *request, id response) {
                 if (GETTAG) {
-                    if (GETRETVAL) {
+                        if (GETRETVAL) {
                         [btn setTitle:@"" forState:UIControlStateNormal];
                     } else {
                         GL_ALERTCONTR_1(GETRETMSG);
@@ -446,7 +446,6 @@
 
 
 
-
 /**
  处理异常值
 
@@ -456,7 +455,7 @@
 - (void)disposeIsAbnormalValue:(NSString *)value WithType:(NSString *)type
 {
     NSDictionary *postDic = @{
-                              FUNCNAME : @"wxSendModel",
+                              FUNC : @"wxSendModel",
                               @"blood_value" : value,
                               @"type" : type,
                               @"userid" : USER_ID
