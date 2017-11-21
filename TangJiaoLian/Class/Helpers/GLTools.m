@@ -226,15 +226,15 @@ void GL_DisLog(NSString *log){
     NSInteger day = [GLTools dateDifferWithStartTime:CGM_Start_Time andEnd:CGM_Ending_Time];
     
     if (day > 2  && day <= 4) {
-        return 1.2f;
-    } else if(day > 4 && day <= 5){
         return 1.0f;
-    } else if(day > 5 && day <= 7){
+    } else if(day > 4 && day <= 5){
         return 0.6f;
-    } else if(day > 7){
+    } else if(day > 5 && day <= 7){
         return 0.4f;
+    } else if(day > 7){
+        return 0.2f;
     } else {
-        return 1.5f;
+        return 1.2f;
     }
 }
 
@@ -250,7 +250,9 @@ void GL_DisLog(NSString *log){
         }
         
         if(GL_APPLICATION.applicationState == UIApplicationStateActive){
-            GL_ALERT(nil, stateStr, 20170330, @"确定",nil);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                GL_ALERT(nil, stateStr, 20170330, @"确定",nil);
+            });
         }
         [GLTools noti:stateStr isWarning:true];
         [GL_USERDEFAULTS setBool:true forKey:SAMISWEARWARNING];

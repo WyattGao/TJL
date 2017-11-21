@@ -66,7 +66,7 @@
         _dataAnalysisBtn = [GLButton new];
         [_dataAnalysisBtn setFont:GL_FONT(12)];
         [_dataAnalysisBtn setTitleColor:TCOL_HOMETEXTCOLOR forState:UIControlStateNormal];
-        [_dataAnalysisBtn setTitle:@"数据分析" forState:UIControlStateNormal];
+        [_dataAnalysisBtn setTitle:@"详细记录" forState:UIControlStateNormal];
         [_dataAnalysisBtn setCornerRadius:13.0f];
         [_dataAnalysisBtn setBackgroundColor:TCOL_MAIN forState:UIControlStateNormal];
         [_dataAnalysisBtn setTextAlignment:NSTextAlignmentCenter];

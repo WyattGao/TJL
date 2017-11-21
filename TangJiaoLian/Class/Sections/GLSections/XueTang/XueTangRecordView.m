@@ -84,6 +84,8 @@
     
     for (NSInteger i = 0;i < 4;i++) {
         XueTangRecordBtn *btn = [XueTangRecordBtn new];
+        [btn setBackgroundColor:TCOL_RECORDCUTCOLOR forState:UIControlStateSelected];
+
         [self addSubview:btn];
         [btn setTitle:@[@"饮食",@"用药",@"胰岛素",@"运动"][i] forState:UIControlStateNormal];
         [btn setImage:[UIImage imageNamed:@[@"记录饮食",@"记录用药",@"记录胰岛素",@"记录运动"][i]] forState:UIControlStateNormal];
@@ -113,9 +115,12 @@
             btn.userInteractionEnabled = false;
             btn.selected               = false;
         }
+//#if DEBUG
+//        btn.userInteractionEnabled = true;
+//        btn.selected = true;
+//#endif
     }
 }
-
 
 - (void)recordClick:(XueTangRecordBtn *)sender
 {

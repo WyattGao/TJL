@@ -76,7 +76,7 @@
     //    CAShapeLayer *layer = [CAShapeLayer layer];
     layer_x.fillColor = [UIColor redColor].CGColor;
     layer_x.lineWidth =  1.0f;
-    layer_x.lineCap = kCALineCapRound;
+    layer_x.lineCap = kCALineCapRound; 
     layer_x.lineJoin = kCALineJoinRound;
     layer_x.strokeColor = _xqdColor.chartLine_XYColor.CGColor;
     [self.layer addSublayer:layer_x];

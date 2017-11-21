@@ -37,6 +37,10 @@ SlideRuleView *slideRuleView;
         self.backgroundColor = RGBA(0, 0, 0, 0.3f);
         self.mainView.y      = SCREEN_HEIGHT - 240;
     }];
+    
+    if (self.type == GLSlideRuleViewReferenceBloodType) {
+        _timeBtn.text = [[NSDate date] toString:@"yyyy-MM-dd HH:mm"];
+    }
 }
 
 - (void)dismiss

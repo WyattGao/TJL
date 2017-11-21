@@ -23,6 +23,8 @@
 #import "RunChartViewController.h"
 #import "RingTimeHelpViewController.h"
 #import "SlideRuleView.h"
+#import "WearRecordEntity.h"
+#import "WearRecordDetailViewController.h"
 
 typedef NS_ENUM(NSInteger,GLRecordWearingTimeType){
     ///开始佩戴记录
@@ -66,6 +68,9 @@ typedef NS_ENUM(NSInteger,GLRecordWearingTimeType){
 @property (nonatomic,assign) BOOL isStartGettingDatav; /**< 是否开始获取数据 */
 
 @property (nonatomic,strong) RingTimeHelpViewController *ringTimeHelpVC; /**< 环信时间按钮操作帮助 */
+
+@property (nonatomic,strong) WearRecordDetailViewController *detailVC; /**< 详细记录 */
+
 
 @end
 
@@ -112,6 +117,7 @@ typedef NS_ENUM(NSInteger,GLRecordWearingTimeType){
     if (ISBINDING) {
         [self setNavTitle:@"动态血糖（正在连接）"];
         [SVProgressHUD showWithStatus:@"正在连接设备"];
+        [self setRightBtnImgNamed:@"刷新-白"];
     } else {
         [self setNavTitle:@"动态血糖（未连接）"];
     }
@@ -197,6 +203,7 @@ typedef NS_ENUM(NSInteger,GLRecordWearingTimeType){
         [self.xueTangView.shiShiView.connectStateLbl setText:@"监测：关"];
         [self.xueTangView.shiShiView.connectSwitch setOn:false];
         [self setNavTitle:@"动态血糖（未连接）"];
+        self.navigationItem.rightBarButtonItem = nil;
         
         //清除绑定时间
         [GL_USERDEFAULTS setObject:nil forKey:SamStartBinDingDeviceTime];
@@ -305,7 +312,7 @@ typedef NS_ENUM(NSInteger,GLRecordWearingTimeType){
         
         BOOL isSenorInArray = NO;
         for (LFPeripheral *device in self.devicesArr) {
-            if ([device.identifier isEqualToString:sensor.identifier]) {
+            if ([device.identifier isEqualToString:sensor.identifier] || [device.sensorName isEqualToString:sensor.sensorName]) {
                 isSenorInArray = YES;
             }
         }
@@ -658,6 +665,13 @@ typedef NS_ENUM(NSInteger,GLRecordWearingTimeType){
     
     NSArray *newCurrentValue = [notification object];
     
+    CGFloat lastValue = [[newCurrentValue lastObject] floatValue];
+    if (lastValue>=600) {
+        [GLTools CGMUILocalNotification:HEIGH600];
+    }else if (lastValue<30){
+        [GLTools CGMUILocalNotification:LOW30];
+    }
+    
     NSMutableArray *allCurrentValue = [NSMutableArray arrayWithArray:[GLCache readCacheArrWithName:SamCurrentValueArr]];
     [allCurrentValue addObjectsFromArray:newCurrentValue];
     [GLCache writeCacheArr:allCurrentValue name:SamCurrentValueArr];
@@ -717,7 +731,7 @@ typedef NS_ENUM(NSInteger,GLRecordWearingTimeType){
         //将数据存到本地
         //数据示例 {value:5.23,collectedtime:'2015-12-17 16:30:55'}
         if ([allCurrentValue[i] floatValue]>600||[allCurrentValue[i] floatValue]<30) {
-            if (i && [allCurrentValue[i] floatValue] >= 0) {
+            if (i && ([allCurrentValue[i] floatValue] >= 0 || [bloodValue floatValue] >= 1000)) {
                 bloodValue = [[allBloodValueArr lastObject] getStringValue:@"value"];
             } else {
                 bloodValue = @"0.0";
@@ -914,6 +928,7 @@ typedef NS_ENUM(NSInteger,GLRecordWearingTimeType){
                     
                     //修改标题提示
                     [self setNavTitle:@"动态血糖（已连接）"];
+                    [self setRightBtnImgNamed:@"刷新-白"];
                 } else {
                     //上传结束佩戴记录成功，停止设备
                     GL_DisLog(@"已上传结束佩戴记录,开始停止设备");
@@ -1106,23 +1121,21 @@ typedef NS_ENUM(NSInteger,GLRecordWearingTimeType){
     }
 }
 
-#pragma mark - 跳转蓝牙设置所需字符 利用ASCII值进行拼装组合方法。这样可绕过审核。
--(NSString *) getDefaultWork{
-    NSData *dataOne = [NSData dataWithBytes:(unsigned char []){0x64,0x65,0x66,0x61,0x75,0x6c,0x74,0x57,0x6f,0x72,0x6b,0x73,0x70,0x61,0x63,0x65} length:16];
-    NSString *method = [[NSString alloc] initWithData:dataOne encoding:NSASCIIStringEncoding];
-    return method;
-}
-
--(NSString *) getBluetoothMethod{
-    NSData *dataOne = [NSData dataWithBytes:(unsigned char []){0x6f, 0x70, 0x65, 0x6e, 0x53, 0x65, 0x6e, 0x73, 0x69,0x74, 0x69,0x76,0x65,0x55,0x52,0x4c} length:16];
-    NSString *keyone = [[NSString alloc] initWithData:dataOne encoding:NSASCIIStringEncoding];
-    NSData *dataTwo = [NSData dataWithBytes:(unsigned char []){0x77,0x69,0x74,0x68,0x4f,0x70,0x74,0x69,0x6f,0x6e,0x73} length:11];
-    NSString *keytwo = [[NSString alloc] initWithData:dataTwo encoding:NSASCIIStringEncoding];
-    NSString *method = [NSString stringWithFormat:@"%@%@%@%@",keyone,@":",keytwo,@":"];
-    return method;
-}
-
 #pragma mark - 点击事件
+//右上角刷新按钮点击事件，主动获取数据
+- (void)navRightBtnClick:(UIButton *)sender
+{
+    GL_ALERT_S(@"立即同步");
+    if (![self.navigationItem.title isEqualToString:@"动态血糖（已连接）"]) {
+        if ([LFHardwareConnector shareConnector].delegate != [SMDBlueToothManager sharedManger]) {
+            [LFHardwareConnector shareConnector].delegate = [SMDBlueToothManager sharedManger];
+        }
+        [self startConnectDevice];
+    } else {
+        [self getDeviceAllData];
+    }
+}
+
 //停止监测
 - (void)stopBLE
 {
@@ -1211,9 +1224,21 @@ typedef NS_ENUM(NSInteger,GLRecordWearingTimeType){
         
         //点击数据分析回调
         _xueTangView.ringView.dataAnalysisBtnClick = ^{
-            ws.analysisVC.startTimeStr = [GL_USERDEFAULTS getStringValue:SamStartBinDingDeviceTime];
-            ws.analysisVC.endTimeStr   = [GLTools getNowTime];
-            [ws pushWithController:ws.analysisVC];
+//            ws.analysisVC.startTimeStr = [GL_USERDEFAULTS getStringValue:SamStartBinDingDeviceTime];
+//            ws.analysisVC.endTimeStr   = [GLTools getNowTime];
+//            [ws pushWithController:ws.analysisVC];
+            
+            
+            WearRecordEntity *entity = [WearRecordEntity new];
+            entity.userid            = USER_ID;
+            entity.endtime           = [GLTools getNowTime];
+            entity.starttime         = [GL_USERDEFAULTS getStringValue:SamStartBinDingDeviceTime];
+            entity.emittercode       = [GL_USERDEFAULTS getStringValue:SamBangDingDeviceName];
+                //佩戴设备记录模型
+            ws.detailVC              = [WearRecordDetailViewController new];
+            ws.detailVC.entity       = entity;
+            [ws pushWithController:ws.detailVC];
+
         };
         
         _xueTangView.ringView.helpBtn.buttonClick = ^(GLButton *sender) {

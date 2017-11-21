@@ -107,10 +107,8 @@
     _xqdColor = xqdColor;
     
     if (!_xqdColor.isMoreLine) {
-        _xqdColor.chartLine_pointAndPointX = 20 * [self refreshChatLineScaling];
+        _xqdColor.chartLine_pointAndPointX = 20 * [GLTools refreshChatLineScaling];
     }
-   
-
 
     _mainScroll.contentSize = CGSizeMake(_xqdColor.chartLine_Xarr.count * _xqdColor.chartLine_pointAndPointX, _chartLine_fream.size.height);
     
@@ -146,23 +144,6 @@
         [ws setRefresh];
     });
      */
-}
-
-- (CGFloat)refreshChatLineScaling
-{
-    NSInteger day = [TimeManage dayToDay:CGM_Start_Time andEnd:CGM_Ending_Time];
-    
-    if (day > 2  && day <= 4) {
-        return 1.2f;
-    } else if(day > 4 && day <= 5){
-        return 1.0f;
-    } else if(day > 5 && day <= 7){
-        return 0.6f;
-    } else if(day > 7){
-        return 0.4f;
-    } else {
-        return 1.5f;
-    }
 }
 
 //将scrollview定位到当前的时间点(将当前时间点定位到中间位置)
